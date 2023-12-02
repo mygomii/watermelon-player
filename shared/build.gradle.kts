@@ -12,9 +12,11 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    android {
+    androidTarget {
         compilations.all {
-            kotlinOptions.jvmTarget = "17"
+            kotlinOptions {
+                jvmTarget = "17"
+            }
         }
     }
 
@@ -87,4 +89,9 @@ android {
     defaultConfig {
         minSdk = 24
     }
+    compileOptions {
+        sourceCompatibility(JavaVersion.VERSION_17)
+        targetCompatibility(JavaVersion.VERSION_17)
+    }
+
 }

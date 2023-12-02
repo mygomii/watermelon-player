@@ -1,5 +1,5 @@
 buildscript {
-    val agp_version by extra("7.3.0")
+    val agp_version by extra("8.2.0")
     repositories {
         gradlePluginPortal()
         google()
