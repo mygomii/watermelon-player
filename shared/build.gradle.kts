@@ -6,7 +6,7 @@ plugins {
 
 //@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-//    targetHierarchy.default()
+    targetHierarchy.default()
 
     android()
     iosX64()
@@ -47,14 +47,31 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+                implementation(Deps.ktorCore)
+                implementation(Deps.ktorSerialization)
+                implementation(Deps.ktorSerializationJson)
+                implementation(Deps.sqlDelightRuntime)
+                implementation(Deps.sqlDelightCoroutinesExtensions)
+                implementation(Deps.kotlinDateTime)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(Deps.assertK)
+                implementation(Deps.turbine)
             }
         }
+        val androidMain by getting {
+            dependencies {
+                implementation(Deps.ktorAndroid)
+                implementation(Deps.sqlDelightAndroidDriver)
+            }
+        }
+
+        val iosX64Test by getting
+        val iosArm64Test by getting
+        val iosSimulatorArm64Test by getting
     }
 }
 
