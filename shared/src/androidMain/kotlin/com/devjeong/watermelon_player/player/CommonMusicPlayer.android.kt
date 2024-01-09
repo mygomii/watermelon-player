@@ -3,16 +3,23 @@ package com.devjeong.watermelon_player.player
 import android.content.Context
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
+import androidx.media3.common.Tracks
 import androidx.media3.exoplayer.ExoPlayer
+import kotlinx.coroutines.flow.MutableStateFlow
 
 actual class CommonMusicPlayer actual constructor() : Player.Listener {
     private lateinit var player: ExoPlayer
+    val changedItem = MutableStateFlow(0)
 
     fun initialize(context: Context, trackList: MutableList<MediaItem>) {
         player = ExoPlayer.Builder(context).build()
         player.addListener(this)
         player.setMediaItems(trackList)
         player.prepare()
+    }
+
+    override fun onTracksChanged(tracks: Tracks) {
+        changedItem.value = player.currentMediaItemIndex
     }
 
     actual fun play() {

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +54,8 @@ fun PlayerScreen(
 
     val currentSongId = remember { mutableIntStateOf(musicId) }
 
-    val music = playListViewModel.musicListViewModel.findMusicById(currentSongId.intValue)
+    val music =
+        playListViewModel.musicListViewModel.findMusicById(playViewModel.playerUtil.commonMusicPlayer.changedItem.collectAsState().value + 1)
 
     LaunchedEffect(currentSongId.intValue) {
         val value = currentSongId.intValue
