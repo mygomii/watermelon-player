@@ -2,11 +2,13 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-
-	let greet = Greeting().greet()
+    let list = MusicListPresenter().play()
 
 	var body: some View {
-		Text(greet)
+		Text("player").onAppear {
+
+            
+		}
 	}
 }
 
